@@ -135,6 +135,8 @@ private:
     int    m_maxRetries;
     int m_worktimeout = 60;
 
+	int m_zerohash = 0;
+
     string m_response;
 
     Miner * p_miner;

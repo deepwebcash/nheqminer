@@ -224,6 +224,7 @@ void start_mining(int api_port, int cpu_threads, int cuda_device_count, int open
 				//(allshares - accepted) << " RS/min" 
 				CL_N;
 		}
+		
 		if (api) while (api->poll()) {}
 	}
 

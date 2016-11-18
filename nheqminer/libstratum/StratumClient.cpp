@@ -18,6 +18,9 @@ using namespace json_spirit;
 
 #include <boost/log/trivial.hpp>
 
+#include "speed.hpp"
+
+
 #define BOOST_LOG_CUSTOM(sev) BOOST_LOG_TRIVIAL(sev) << "stratum | "
 
 
@@ -284,6 +287,14 @@ void StratumClient<Miner, Job, Solution>::processReponse(const Object& responseO
 						//x_current.unlock();
 						//p_worktimer = new boost::asio::deadline_timer(m_io_service, boost::posix_time::seconds(m_worktimeout));
 						//p_worktimer->async_wait(boost::bind(&StratumClient::work_timeout_handler, this, boost::asio::placeholders::error));
+					}
+
+					if (speed.GetHashSpeed() == 0 ) {
+						m_zerohash++;
+						if (m_zerohash > 10) {
+							m_zerohash = 0;
+							reconnect();
+						}
 					}
 				}
 			}
